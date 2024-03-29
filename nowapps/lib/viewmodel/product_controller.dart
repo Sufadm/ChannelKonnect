@@ -7,7 +7,6 @@ class ProductController extends GetxController {
   final products = <Product>[].obs;
   final isLoading = true.obs;
   final selectedProducts = <Product>[].obs;
-
   @override
   void onInit() {
     fetchProducts();
@@ -22,6 +21,7 @@ class ProductController extends GetxController {
     } finally {
       isLoading(false);
     }
+    update();
   }
 
   void toggleProductSelection(Product product) {
@@ -30,5 +30,6 @@ class ProductController extends GetxController {
     } else {
       selectedProducts.add(product);
     }
+    update();
   }
 }
