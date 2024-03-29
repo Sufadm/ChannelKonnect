@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nowapps/model/utils/const/sizedbox.dart';
 import 'package:nowapps/model/utils/styles/colors.dart';
-import 'package:nowapps/view/components/button.dart';
 import 'package:nowapps/view/pages/productlist/productlist_page.dart';
+import 'package:nowapps/viewmodel/location_model.dart';
 
 class CheckInPage extends StatelessWidget {
   const CheckInPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final currentLocation = Get.put(LocationModel());
     return Scaffold(
       appBar: AppBar(),
       backgroundColor: const Color.fromARGB(255, 255, 255, 255),
@@ -46,7 +46,8 @@ class CheckInPage extends StatelessWidget {
             ElevatedButton.icon(
                 style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(Colors.blue)),
-                onPressed: () {
+                onPressed: () async {
+                  await currentLocation.getLocation();
                   Get.to(const ProductListPage());
                 },
                 icon: const Icon(

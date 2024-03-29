@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:nowapps/model/data/product_model.dart';
 import 'package:nowapps/model/utils/styles/colors.dart';
 import 'package:nowapps/view/components/button.dart';

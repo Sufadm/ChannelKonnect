@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:nowapps/model/service/product_service.dart';
 import 'package:nowapps/view/pages/firstpage/first_page.dart';
 
 void main() {
-  print("sdsds");
-  ProductService().fetchProducts();
   runApp(const MyApp());
 }
 
