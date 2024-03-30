@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:nowapps/model/service/product_service.dart';
 import 'package:nowapps/model/utils/const/sizedbox.dart';
 import 'package:nowapps/model/utils/styles/colors.dart';
 import 'package:nowapps/view/components/button.dart';
