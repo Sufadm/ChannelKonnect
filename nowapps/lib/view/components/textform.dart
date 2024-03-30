@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nowapps/model/utils/styles/textstyles.dart';
 
 class Textform extends StatelessWidget {
+  final String? prefix;
   final TextInputType? keyboardType;
   final int? maxLength;
   final VoidCallback? onTap;
@@ -49,6 +50,7 @@ class Textform extends StatelessWidget {
     this.onFieldSubmitted,
     this.onSuffixTap,
     this.suffixIcon,
+    this.prefix,
   });
 
   @override
@@ -73,6 +75,7 @@ class Textform extends StatelessWidget {
       decoration: InputDecoration(
         hintText: hintText,
         hintStyle: latoB,
+        prefixText: prefix,
         border: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(10)),
         ),

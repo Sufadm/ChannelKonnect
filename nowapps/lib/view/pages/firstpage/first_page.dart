@@ -6,6 +6,7 @@ import 'package:nowapps/view/components/add_form_data_text.dart';
 import 'package:nowapps/view/components/button.dart';
 import 'package:nowapps/view/components/textform.dart';
 import 'package:nowapps/view/pages/checkin/checkin_page.dart';
+import 'package:nowapps/view/pages/retailers_page.dart/retailers_page.dart';
 
 class FirstPage extends StatelessWidget {
   const FirstPage({super.key});
@@ -65,23 +66,38 @@ class FirstPage extends StatelessWidget {
                 ),
                 kHeight10,
                 Textform(
-                  validator: (value) =>
-                      value!.isEmpty ? "Enter PhoneNumber" : null,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Enter Phone Number";
+                    } else if (!isValidPhoneNumber(value)) {
+                      return "Enter a valid Phone Number";
+                    } else {
+                      return null;
+                    }
+                  },
+                  // prefix: "+91 ",
                   maxLength: 10,
                   keyboardType: TextInputType.number,
                   controller: phoneNumberController,
                   hintText: 'Phone Number',
                 ),
+
                 kHeight10,
                 //button
                 Button(
-                  ontap: () {
-                    Get.to(CheckInPage(
-                        name: nameController.text,
-                        email: emailController.text,
-                        location: locationController.text,
-                        address: addressController.text,
-                        phoneNumber: phoneNumberController.text));
+                  ontap: () async {
+                    await addretailer(context);
+                    if (formkey.currentState!.validate()) {
+                      Get.to(const RetailersPage());
+                    }
+                    // Get.to(CheckInPage(
+                    //     name: nameController.text,
+                    //     email: emailController.text,
+                    //     location: locationController.text,
+                    //     address: addressController.text,
+                    //     phoneNumber: phoneNumberController.text)
+
+                    //     );
                   },
                   text: "Next",
                   color: blue,
@@ -92,5 +108,10 @@ class FirstPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  bool isValidPhoneNumber(String? value) {
+    RegExp regex = RegExp(r'^[6-9]\d{9}$');
+    return regex.hasMatch(value ?? '');
   }
 }

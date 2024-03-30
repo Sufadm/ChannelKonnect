@@ -16,22 +16,20 @@ class RetailerController extends GetxController {
     _db = await openDatabase('retailer.db', version: 1,
         onCreate: (db, version) async {
       await db.execute(
-          'CREATE TABLE retailer (id INTEGER PRIMARY KEY, name TEXT, email TEXT, location TEXT, address TEXT, number INTEGER, currentlocation TEXT, date TEXT)');
+          'CREATE TABLE retailer (id INTEGER PRIMARY KEY, name TEXT, email TEXT, location TEXT, address TEXT, number INTEGER)');
     });
     getAllRetailers();
   }
 
   Future<void> addRetailers(RetailerModel value) async {
     await _db.rawInsert(
-        "INSERT INTO retailer (name,email,location,address,number,currentlocation,date)VALUES (?,?,?,?,?,?,?)",
+        "INSERT INTO retailer (name,email,location,address,number)VALUES (?,?,?,?,?)",
         [
           value.name,
           value.email,
           value.landmark,
           value.address,
           value.phoneNumber,
-          value.currentlocation,
-          value.date
         ]);
     getAllRetailers();
   }
@@ -44,64 +42,3 @@ class RetailerController extends GetxController {
     print(retailerMaps);
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// class GetModel extends GetxController{
-
-// }
-// ValueNotifier<List<RetailerModel>> retailerlistNotifier = ValueNotifier([]);
-// late Database _db;
-
-// Future<void> initiDatabase() async {
-//   _db = await openDatabase('retailer.db', version: 1,
-//       onCreate: (db, version) async {
-//     await db.execute(
-//         'CREATE TABLE retailer (id INTEGER PRIMARY KEY, name TEXT, email TEXT, location TEXT, address TEXT, number INTEGER)');
-//   });
-// }
-
-// Future<void> addRatilers(RetailerModel value) async {
-//   await _db.rawInsert(
-//       "INSERT INTO retailer (name,email,location,address,number)VALUES (?,?,?,?,?)",
-//       [
-//         value.name,
-//         value.email,
-//         value.landmark,
-//         value.address,
-//         value.phoneNumber
-//       ]);
-//   getAllReatailers();
-// }
-
-// Future<void> getAllReatailers() async {
-//   retailerlistNotifier.value.clear();
-//   _db.rawQuery("SELECT * FROM retailer");
-// }
