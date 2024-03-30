@@ -10,11 +10,11 @@ class LocationModel extends GetxController {
   LatLng? get currentPosition => _currentPosition.value;
   String get currentAddress => _currentAddress.value;
 
-  @override
-  void onInit() {
-    super.onInit();
-    getLocation();
-  }
+  // @override
+  // void onInit() {
+  //   super.onInit();
+  //   getLocation();
+  // }
 
   Future<void> getLocation() async {
     bool permissionGranted = await _requestLocationPermission();

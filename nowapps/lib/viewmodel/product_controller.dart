@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'package:nowapps/model/data/product_model.dart';
 import 'package:nowapps/model/service/product_service.dart';
-import 'package:nowapps/viewmodel/selected_count.dart';
 
 class ProductController extends GetxController {
   final ProductService _productService = ProductService();

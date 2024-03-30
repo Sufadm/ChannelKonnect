@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart';
 import 'package:nowapps/model/utils/const/sizedbox.dart';
 import 'package:nowapps/model/utils/styles/colors.dart';
+import 'package:nowapps/view/components/add_form_data_text.dart';
 import 'package:nowapps/view/components/button.dart';
 import 'package:nowapps/view/components/textform.dart';
 import 'package:nowapps/view/pages/checkin/checkin_page.dart';
@@ -12,11 +12,6 @@ class FirstPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final nameController = TextEditingController();
-    final emailController = TextEditingController();
-    final locationController = TextEditingController();
-    final addressController = TextEditingController();
-    final phoneNumberController = TextEditingController();
     final formkey = GlobalKey<FormState>();
     return Scaffold(
       appBar: AppBar(
@@ -46,7 +41,6 @@ class FirstPage extends StatelessWidget {
                   },
                   controller: nameController,
                   hintText: 'Name',
-                  onTap: () {},
                 ),
                 kHeight10,
                 Textform(
@@ -54,7 +48,6 @@ class FirstPage extends StatelessWidget {
                   keyboardType: TextInputType.emailAddress,
                   controller: emailController,
                   hintText: 'Email',
-                  onTap: () {},
                 ),
                 kHeight10,
                 Textform(
@@ -62,7 +55,6 @@ class FirstPage extends StatelessWidget {
                       value!.isEmpty ? "Enter Location" : null,
                   controller: locationController,
                   hintText: 'Location',
-                  onTap: () {},
                 ),
                 kHeight10,
                 Textform(
@@ -70,7 +62,6 @@ class FirstPage extends StatelessWidget {
                   maxLines: 3,
                   controller: addressController,
                   hintText: 'Address',
-                  onTap: () {},
                 ),
                 kHeight10,
                 Textform(
@@ -80,22 +71,17 @@ class FirstPage extends StatelessWidget {
                   keyboardType: TextInputType.number,
                   controller: phoneNumberController,
                   hintText: 'Phone Number',
-                  onTap: () {},
                 ),
                 kHeight10,
                 //button
                 Button(
                   ontap: () {
-                    Get.to(const CheckInPage());
-                    // if (formkey.currentState!.validate()) {
-                    //   Get.off(const CheckInPage());
-                    // } else {
-                    //   Get.snackbar(
-                    //     snackPosition: SnackPosition.BOTTOM,
-                    //     "Error",
-                    //     "Please fill out all required fields correctly",
-                    //   );
-                    // }
+                    Get.to(CheckInPage(
+                        name: nameController.text,
+                        email: emailController.text,
+                        location: locationController.text,
+                        address: addressController.text,
+                        phoneNumber: phoneNumberController.text));
                   },
                   text: "Next",
                   color: blue,

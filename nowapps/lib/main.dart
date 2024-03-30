@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:get/get.dart';
+import 'package:nowapps/model/service/db_retailer_service.dart';
 import 'package:nowapps/view/pages/firstpage/first_page.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await RetailerController().initDatabase();
+  Get.put(RetailerController());
   runApp(const MyApp());
 }
 

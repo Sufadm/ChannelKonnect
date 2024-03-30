@@ -4,7 +4,7 @@ import 'package:nowapps/model/utils/styles/textstyles.dart';
 class Textform extends StatelessWidget {
   final TextInputType? keyboardType;
   final int? maxLength;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
   final TextEditingController controller;
   final String hintText;
   final int? maxLines;
@@ -31,7 +31,7 @@ class Textform extends StatelessWidget {
     required this.hintText,
     this.keyboardType,
     this.maxLength,
-    required this.onTap,
+    this.onTap,
     this.maxLines,
     this.validator,
     this.contentPadding,
