@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nowapps/model/utils/const/retailers_brand.dart';
+import 'package:nowapps/model/utils/styles/colors.dart';
 import 'package:nowapps/view/pages/cart/cart_page.dart';
-import 'package:nowapps/view/pages/checkoutpage/checkout_page.dart';
 import 'package:nowapps/view/pages/productlist/product_details_page.dart';
 import 'package:nowapps/viewmodel/product_controller.dart';
 
@@ -16,14 +16,18 @@ class ProductListPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => Get.to(() => const CheckoutPage()),
+        backgroundColor: const Color.fromARGB(255, 3, 16, 95),
+        automaticallyImplyLeading: false,
+        title: Text(
+          'Product List',
+          style: GoogleFonts.lato(color: white),
         ),
-        title: const Text('Product List'),
         actions: [
           IconButton(
-            icon: const Icon(Icons.shopping_cart),
+            icon: const Icon(
+              Icons.shopping_cart,
+              color: white,
+            ),
             onPressed: () => Get.to(() => const CartPage()),
           ),
         ],

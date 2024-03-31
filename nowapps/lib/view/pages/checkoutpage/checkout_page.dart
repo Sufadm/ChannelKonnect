@@ -16,6 +16,7 @@ class CheckoutPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 1, 3, 32),
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -27,10 +28,6 @@ class CheckoutPage extends StatelessWidget {
                 icon: const Icon(Icons.logout)),
           )
         ],
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => Get.to(() => const FirstPage()),
-        ),
       ),
       body: Center(
         child: Column(
@@ -43,7 +40,7 @@ class CheckoutPage extends StatelessWidget {
                   style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(blue)),
                   onPressed: () {
-                    Get.to(() => const ProductListPage());
+                    Get.offAll(() => const ProductListPage());
                   },
                   child: const Text(
                     "Book Order",

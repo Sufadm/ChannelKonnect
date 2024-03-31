@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:nowapps/model/service/add_to_cart_service.dart';
-import 'package:nowapps/model/utils/const/sizedbox.dart';
+import 'package:nowapps/model/utils/const/retailers_brand.dart';
 import 'package:nowapps/model/utils/styles/colors.dart';
 import 'package:nowapps/view/components/button.dart';
 import 'package:nowapps/view/pages/success/success_page.dart';
@@ -56,10 +56,7 @@ class CartPage extends StatelessWidget {
                                   data.name!,
                                   style: GoogleFonts.lato(),
                                 ),
-                                leading: const CircleAvatar(
-                                  radius: 25,
-                                  backgroundImage: NetworkImage(images),
-                                ),
+                                leading: Image.network(repeatedImages[index]),
                                 subtitle: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [

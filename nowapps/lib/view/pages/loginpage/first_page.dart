@@ -98,7 +98,7 @@ class FirstPage extends StatelessWidget {
                     if (formkey.currentState!.validate()) {
                       await addretailer(context);
                       initSharedPreferences();
-                      Get.to(() => const RetailersPage());
+                      Get.offAll(() => const RetailersPage());
                     }
                   },
                   text: "Submit",

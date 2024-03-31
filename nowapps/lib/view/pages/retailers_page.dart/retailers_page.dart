@@ -16,8 +16,9 @@ class RetailersPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: blue,
+        automaticallyImplyLeading: false,
         title: Text(
-          "Check-In Page",
+          "Retailer-Page",
           style: GoogleFonts.lato(color: white),
         ),
       ),

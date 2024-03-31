@@ -5,7 +5,6 @@ import 'package:nowapps/model/service/checkin_service.dart';
 import 'package:nowapps/model/utils/styles/colors.dart';
 import 'package:nowapps/view/pages/cart/cart_page.dart';
 import 'package:nowapps/view/pages/checkoutpage/checkout_page.dart';
-import 'package:nowapps/view/pages/productlist/productlist_page.dart';
 import 'package:nowapps/viewmodel/location_model.dart';
 
 PersistentBottomSheetController bottomSheets(
@@ -32,7 +31,7 @@ PersistentBottomSheetController bottomSheets(
                   await currentLocation.getLocation();
                   await Future.delayed(const Duration(seconds: 2));
                   currentlocation.addLocation(model3);
-                  Get.to(() => const CheckoutPage());
+                  Get.offAll(() => const CheckoutPage());
                 } catch (error) {
                   Get.snackbar(
                     snackPosition: SnackPosition.BOTTOM,

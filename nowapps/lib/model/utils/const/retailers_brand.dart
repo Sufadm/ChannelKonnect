@@ -17,3 +17,6 @@ List<String> shoesImage = [
 
 List<String> repeatedImages =
     List.generate(100, (index) => shoesImage[index % 5]);
+
+const lottieImage =
+    "https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs3/147909022/original/74ded133c46655d9e0755d30144a2a3c3ea9632e/animate-your-svg-file.jpg";
