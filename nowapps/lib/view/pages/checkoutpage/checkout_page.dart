@@ -6,6 +6,7 @@ import 'package:nowapps/view/pages/cart/cart_page.dart';
 import 'package:nowapps/view/pages/loginpage/first_page.dart';
 import 'package:nowapps/view/pages/productlist/productlist_page.dart';
 import 'package:nowapps/view/pages/retailers_page.dart/retailers_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CheckoutPage extends StatelessWidget {
   const CheckoutPage({super.key});
@@ -15,6 +16,17 @@ class CheckoutPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 1, 3, 32),
       appBar: AppBar(
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: IconButton(
+                onPressed: () {
+                  logout();
+                  Get.to(() => const FirstPage());
+                },
+                icon: const Icon(Icons.logout)),
+          )
+        ],
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Get.to(() => const FirstPage()),
@@ -70,10 +82,16 @@ class CheckoutPage extends StatelessWidget {
                     "Checkout",
                     style: TextStyle(color: white),
                   )),
-            )
+            ),
+            kHeight10,
           ],
         ),
       ),
     );
+  }
+
+  Future<void> logout() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool("authUser", false);
   }
 }

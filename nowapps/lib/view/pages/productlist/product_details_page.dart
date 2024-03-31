@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nowapps/model/data/add_to_cart_model.dart';
 import 'package:nowapps/model/service/add_to_cart_service.dart';
+import 'package:nowapps/model/utils/const/retailers_brand.dart';
 import 'package:nowapps/view/components/button.dart';
 import 'package:nowapps/view/components/products_counts.dart';
 import 'package:nowapps/viewmodel/counter_product.dart';
@@ -10,12 +11,10 @@ import 'package:nowapps/viewmodel/product_controller.dart';
 
 class ProductDetailsPage extends StatelessWidget {
   final int index;
-
   const ProductDetailsPage({
     super.key,
     required this.index,
   });
-
   @override
   Widget build(BuildContext context) {
     ProductController controller = Get.find();
@@ -37,7 +36,7 @@ class ProductDetailsPage extends StatelessWidget {
                       height: 400,
                       width: double.infinity,
                       child: Image.network(
-                        "https://img.freepik.com/premium-photo/young-bearded-man-model-fashion-sitting-urban-step-wearing-casual-clothes_1139-1325.jpg?size=626&ext=jpg&ga=GA1.1.1827530304.1711584000&semt=ais",
+                        repeatedImages[index],
                         fit: BoxFit.cover,
                       ),
                     ),

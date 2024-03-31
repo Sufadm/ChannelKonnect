@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:nowapps/model/utils/const/retailers_brand.dart';
 import 'package:nowapps/model/utils/const/sizedbox.dart';
 import 'package:nowapps/model/utils/styles/colors.dart';
 import 'package:nowapps/view/pages/retailers_page.dart/widget/bottom_sheet.dart';
@@ -12,7 +13,6 @@ class RetailersPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final currentLocation = Get.put(LocationModel());
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: blue,
@@ -34,18 +34,16 @@ class RetailersPage extends StatelessWidget {
                     bottomSheets(context, currentLocation);
                   },
                   title: Text(
-                    "Zara",
+                    retailerName[index],
                     style: GoogleFonts.lato(),
                   ),
                   subtitle: Text(
-                    "Clothing",
+                    "Retailers",
                     style: GoogleFonts.lato(),
                   ),
-                  leading: const CircleAvatar(
-                    radius: 25,
-                    backgroundImage: NetworkImage(
-                        "https://media.istockphoto.com/id/518174626/photo/zara.jpg?s=612x612&w=0&k=20&c=l99gcgIcBazj69YH_k3p8X-SostbsO48eFZfUbYyZrg="),
-                  ),
+                  leading: CircleAvatar(
+                      radius: 25,
+                      backgroundImage: NetworkImage(imageUrl[index])),
                 ),
               ),
             ),
