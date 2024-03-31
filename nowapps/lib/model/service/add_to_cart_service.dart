@@ -43,6 +43,25 @@ class CartController extends GetxController {
     update();
   }
 
+  Future<void> deleteCartItemAll() async {
+    await _db.rawDelete('DELETE FROM productcart');
+    cartList.clear();
+    update();
+  }
+
+  Future<void> updateCartItemQuantity(int id, int newQuantity) async {
+    await _db.rawUpdate(
+      'UPDATE productcart SET quantity = ? WHERE id = ?',
+      [newQuantity, id],
+    );
+
+    final int index = cartList.indexWhere((item) => item.id == id);
+    if (index != -1) {
+      cartList[index].quantity = newQuantity;
+      update();
+    }
+  }
+
   @override
   void onClose() async {
     await _db.close();

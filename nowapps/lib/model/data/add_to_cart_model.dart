@@ -1,7 +1,7 @@
 class AddToCartModel {
   final int? id;
   final String? name;
-  final int? quantity;
+  int? quantity;
   final double? price;
 
   AddToCartModel({

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nowapps/model/utils/styles/colors.dart';
+import 'package:nowapps/view/pages/cart/cart_page.dart';
+import 'package:nowapps/view/pages/checkoutpage/checkout_page.dart';
 import 'package:nowapps/view/pages/productlist/productlist_page.dart';
 import 'package:nowapps/viewmodel/location_model.dart';
 
@@ -19,9 +21,10 @@ PersistentBottomSheetController bottomSheets(
                   backgroundColor: MaterialStateProperty.all(Colors.blue)),
               onPressed: () async {
                 try {
+                  check = false;
                   await currentLocation.getLocation();
                   await Future.delayed(const Duration(seconds: 2));
-                  Get.to(const ProductListPage());
+                  Get.to(() => const CheckoutPage());
                 } catch (error) {
                   Get.snackbar(
                     snackPosition: SnackPosition.BOTTOM,

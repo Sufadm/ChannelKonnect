@@ -5,7 +5,6 @@ import 'package:nowapps/model/utils/styles/colors.dart';
 import 'package:nowapps/view/components/add_form_data_text.dart';
 import 'package:nowapps/view/components/button.dart';
 import 'package:nowapps/view/components/textform.dart';
-import 'package:nowapps/view/pages/checkin/checkin_page.dart';
 import 'package:nowapps/view/pages/retailers_page.dart/retailers_page.dart';
 
 class FirstPage extends StatelessWidget {
@@ -75,7 +74,7 @@ class FirstPage extends StatelessWidget {
                       return null;
                     }
                   },
-                  // prefix: "+91 ",
+                  //   prefix: "+91 ",
                   maxLength: 10,
                   keyboardType: TextInputType.number,
                   controller: phoneNumberController,
@@ -88,18 +87,10 @@ class FirstPage extends StatelessWidget {
                   ontap: () async {
                     await addretailer(context);
                     if (formkey.currentState!.validate()) {
-                      Get.to(const RetailersPage());
+                      Get.to(() => const RetailersPage());
                     }
-                    // Get.to(CheckInPage(
-                    //     name: nameController.text,
-                    //     email: emailController.text,
-                    //     location: locationController.text,
-                    //     address: addressController.text,
-                    //     phoneNumber: phoneNumberController.text)
-
-                    //     );
                   },
-                  text: "Next",
+                  text: "Submit",
                   color: blue,
                 )
               ],

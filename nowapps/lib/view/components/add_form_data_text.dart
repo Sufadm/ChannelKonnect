@@ -10,8 +10,6 @@ final addressController = TextEditingController();
 final phoneNumberController = TextEditingController();
 
 Future<void> addretailer(BuildContext context) async {
-  // final LocationModel currentLocation = Get.find<LocationModel>();
-
   final name = nameController.text.trim();
   final email = emailController.text.trim();
   final landmark = locationController.text.trim();
@@ -19,8 +17,6 @@ Future<void> addretailer(BuildContext context) async {
   final phoneNumber = int.parse(phoneNumberController.text.trim());
 
   final model1 = RetailerModel(
-      // currentlocation: currentLocation.currentAddress,
-      // date: DateTime.now().toIso8601String(),
       name: name,
       email: email,
       landmark: landmark,

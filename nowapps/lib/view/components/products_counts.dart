@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nowapps/model/utils/const/sizedbox.dart';
 import 'package:nowapps/viewmodel/counter_product.dart';
 
 class CounterWidget extends StatelessWidget {

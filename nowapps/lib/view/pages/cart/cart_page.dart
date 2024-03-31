@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 import 'package:nowapps/model/service/add_to_cart_service.dart';
 import 'package:nowapps/model/utils/const/sizedbox.dart';
 import 'package:nowapps/model/utils/styles/colors.dart';
 import 'package:nowapps/view/components/button.dart';
 import 'package:nowapps/view/pages/success/success_page.dart';
+import 'package:nowapps/viewmodel/counter_product.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({
@@ -14,6 +16,8 @@ class CartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(CounterController());
+    CounterController countercontroller = Get.find();
     final cartcontroller = Get.put(CartController());
     return Scaffold(
       appBar: AppBar(),
@@ -22,11 +26,16 @@ class CartPage extends StatelessWidget {
           GetBuilder<CartController>(
             builder: (controller) {
               if (controller.cartList.isEmpty) {
-                return const Expanded(
+                return Expanded(
                   child: Center(
-                    child: Text(
-                      "Your cart is empty",
-                      style: TextStyle(fontSize: 18),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Lottie.network(
+                            "https://lottie.host/32a9a369-8fce-4018-912a-ebe228d5666c/YpgngkdIcE.json"),
+                        Text("Your cart is empty",
+                            style: GoogleFonts.lato(fontSize: 18)),
+                      ],
                     ),
                   ),
                 );
@@ -39,7 +48,6 @@ class CartPage extends StatelessWidget {
                       var totalprice = data.price! * data.quantity!;
                       return Card(
                         child: SizedBox(
-                          height: 100,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
@@ -79,11 +87,14 @@ class CartPage extends StatelessWidget {
                                                 controller
                                                     .deleteCartItem(index);
                                                 Get.back();
+                                                Get.snackbar(
+                                                    "${controller.cartList[index].name}",
+                                                    "removed",
+                                                    duration: const Duration(
+                                                        milliseconds: 1000));
                                               },
                                               textCancel: "Cancel",
-                                              onCancel: () {
-                                                // Get.back();
-                                              },
+                                              onCancel: () {},
                                             );
                                           },
                                           child: Text(
@@ -94,7 +105,72 @@ class CartPage extends StatelessWidget {
                                           ),
                                         )
                                       ],
-                                    )
+                                    ),
+                                    Row(
+                                      children: [
+                                        IconButton(
+                                          icon: const Icon(Icons.remove),
+                                          onPressed: () async {
+                                            await Future.delayed(const Duration(
+                                                milliseconds: 500));
+                                            int currentQuantity = controller
+                                                    .cartList[index].quantity ??
+                                                0;
+
+                                            if (currentQuantity > 0) {
+                                              int newQuantity =
+                                                  currentQuantity - 1;
+
+                                              await controller
+                                                  .updateCartItemQuantity(
+                                                      controller
+                                                          .cartList[index].id!,
+                                                      newQuantity);
+
+                                              Get.snackbar("Removed",
+                                                  "1 product removed",
+                                                  duration: const Duration(
+                                                      milliseconds: 1000));
+                                            }
+                                          },
+                                        ),
+                                        Center(
+                                          child: Obx(
+                                            () => Text(
+                                              controller
+                                                  .cartList[index].quantity
+                                                  .toString(),
+                                              style: const TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        IconButton(
+                                          icon: const Icon(Icons.add),
+                                          onPressed: () async {
+                                            await Future.delayed(const Duration(
+                                                milliseconds: 500));
+
+                                            int currentQuantity = controller
+                                                    .cartList[index].quantity ??
+                                                0;
+                                            int newQuantity =
+                                                currentQuantity + 1;
+
+                                            await controller
+                                                .updateCartItemQuantity(
+                                                    controller
+                                                        .cartList[index].id!,
+                                                    newQuantity);
+                                            Get.snackbar(
+                                                "Added", "1 product added",
+                                                duration: const Duration(
+                                                    milliseconds: 1000));
+                                          },
+                                        ),
+                                      ],
+                                    ),
                                   ],
                                 ),
                               ),
@@ -155,7 +231,8 @@ class CartPage extends StatelessWidget {
                           child: Button(
                             text: "Place order",
                             ontap: () {
-                              Get.to(const SuccessPage());
+                              Get.to(() => const SuccessPage());
+                              check = true;
                             },
                             color: blue,
                           ),
@@ -169,3 +246,5 @@ class CartPage extends StatelessWidget {
     );
   }
 }
+
+bool check = false;
