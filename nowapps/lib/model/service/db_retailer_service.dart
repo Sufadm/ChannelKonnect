@@ -21,6 +21,7 @@ class RetailerController extends GetxController {
     getAllRetailers();
   }
 
+//adding user login information
   Future<void> addRetailers(RetailerModel value) async {
     await _db.rawInsert(
         "INSERT INTO retailer (name,email,location,address,number)VALUES (?,?,?,?,?)",

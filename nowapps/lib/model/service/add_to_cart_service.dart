@@ -21,6 +21,7 @@ class CartController extends GetxController {
     getAllCartList();
   }
 
+//add product to cart
   Future<void> addcartList(AddToCartModel value) async {
     await _db.rawInsert(
         "INSERT INTO productcart (name,price,quantity)VALUES (?,?,?)",
@@ -28,14 +29,15 @@ class CartController extends GetxController {
     getAllCartList();
   }
 
+//getall
   Future<void> getAllCartList() async {
     final List<Map<String, dynamic>> cartListMaps =
         await _db.rawQuery("SELECT * FROM productcart");
     cartList.value =
         cartListMaps.map((e) => AddToCartModel.fromMap(e)).toList();
-    print(cartListMaps);
   }
 
+//delete specific product
   Future<void> deleteCartItem(int index) async {
     int? idToDelete = cartList[index].id;
     await _db.rawDelete('DELETE FROM productcart WHERE id = ?', [idToDelete]);
@@ -43,12 +45,14 @@ class CartController extends GetxController {
     update();
   }
 
+//delete all products from table
   Future<void> deleteCartItemAll() async {
     await _db.rawDelete('DELETE FROM productcart');
     cartList.clear();
     update();
   }
 
+//update quantity in to cartpage
   Future<void> updateCartItemQuantity(int id, int newQuantity) async {
     await _db.rawUpdate(
       'UPDATE productcart SET quantity = ? WHERE id = ?',

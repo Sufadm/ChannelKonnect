@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:nowapps/model/service/add_to_cart_service.dart';
 import 'package:nowapps/model/utils/const/sizedbox.dart';
 import 'package:nowapps/view/pages/checkoutpage/no_order_page.dart';
-import 'package:nowapps/view/pages/productlist/productlist_page.dart';
 import 'package:nowapps/view/pages/success/widgets/custom_bottom.dart';
 
 class SuccessPage extends StatefulWidget {

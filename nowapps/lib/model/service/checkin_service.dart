@@ -23,7 +23,7 @@ class LocationControllerChekIn extends GetxController {
 
   Future<void> addLocation(CheckInModel value) async {
     await _db.rawInsert(
-        "INSERT INTO retailer (date,currentlocation,)VALUES (?,?)",
+        "INSERT INTO retailer (date,currentlocation) VALUES (?,?)",
         [value.date, value.currentlocation]);
     getLocation();
   }

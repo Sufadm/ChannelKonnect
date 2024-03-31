@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:nowapps/model/data/product_model.dart';
 
+//products list fetching
 class ProductService {
   Future<List<Product>> fetchProducts() async {
     final response =
