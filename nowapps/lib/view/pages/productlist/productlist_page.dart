@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:nowapps/model/service/add_to_cart_service.dart';
 import 'package:nowapps/model/utils/const/sizedbox.dart';
 import 'package:nowapps/model/utils/styles/colors.dart';
+import 'package:nowapps/view/pages/cart/cart_page.dart';
 import 'package:nowapps/view/pages/productlist/product_details_page.dart';
 import 'package:nowapps/viewmodel/product_controller.dart';
 
@@ -18,6 +19,12 @@ class ProductListPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Product List'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.shopping_cart),
+            onPressed: () => Get.to(const CartPage()),
+          )
+        ],
       ),
       body: GetBuilder<ProductController>(
         builder: (controller) => Column(

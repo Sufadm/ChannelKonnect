@@ -9,7 +9,6 @@ void main() async {
   await RetailerController().initDatabase();
   await CartController().initDatabase();
   Get.put(RetailerController());
-
   runApp(const MyApp());
 }
 

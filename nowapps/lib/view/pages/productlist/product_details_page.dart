@@ -3,17 +3,14 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nowapps/model/data/add_to_cart_model.dart';
 import 'package:nowapps/model/service/add_to_cart_service.dart';
-import 'package:nowapps/model/utils/const/sizedbox.dart';
-import 'package:nowapps/model/utils/styles/colors.dart';
 import 'package:nowapps/view/components/button.dart';
 import 'package:nowapps/view/components/products_counts.dart';
-import 'package:nowapps/view/pages/cart/cart_page.dart';
 import 'package:nowapps/viewmodel/counter_product.dart';
-
-import '../../../viewmodel/product_controller.dart';
+import 'package:nowapps/viewmodel/product_controller.dart';
 
 class ProductDetailsPage extends StatelessWidget {
   final int index;
+
   const ProductDetailsPage({
     super.key,
     required this.index,
@@ -22,9 +19,10 @@ class ProductDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ProductController controller = Get.find();
-    final data = controller.products[index];
 
     final counter = Get.put(CounterController());
+    final cartController = Get.find<CartController>();
+
     return Scaffold(
       appBar: AppBar(),
       body: Column(
@@ -42,17 +40,15 @@ class ProductDetailsPage extends StatelessWidget {
                       child: Image.network(
                         "https://img.freepik.com/premium-photo/young-bearded-man-model-fashion-sitting-urban-step-wearing-casual-clothes_1139-1325.jpg?size=626&ext=jpg&ga=GA1.1.1827530304.1711584000&semt=ais",
                         fit: BoxFit.cover,
-                        // height: 300,
-                        // width: 300,
                       ),
                     ),
-                    kHeight10,
+                    const SizedBox(height: 10),
                     Text(
                       controller.products[index].prodName.toString(),
                       style: const TextStyle(
                           fontSize: 25, fontWeight: FontWeight.bold),
                     ),
-                    kHeight10,
+                    const SizedBox(height: 10),
                     Row(
                       children: [
                         Container(
@@ -60,11 +56,11 @@ class ProductDetailsPage extends StatelessWidget {
                           color: Colors.green,
                           child: const Center(child: Text("4.2")),
                         ),
-                        kWidth10,
+                        const SizedBox(width: 10),
                         const Text("2,654 Ratings & 278 Reviews")
                       ],
                     ),
-                    kHeight5,
+                    const SizedBox(height: 5),
                     Text(
                       "Special Price",
                       style: GoogleFonts.lato(color: Colors.green),
@@ -76,17 +72,17 @@ class ProductDetailsPage extends StatelessWidget {
                           style: const TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
-                        kWidth25,
+                        const SizedBox(width: 25),
                         Container(
-                            decoration: BoxDecoration(
-                              border: Border.all(color: black),
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(10)),
-                            ),
-                            child: CounterWidget(index: index))
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.black),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(10)),
+                          ),
+                          child: CounterWidget(index: index),
+                        ),
                       ],
                     ),
-//                    const Text("Sdsd"),
                   ],
                 ),
               ),
@@ -97,23 +93,26 @@ class ProductDetailsPage extends StatelessWidget {
             child: Button(
               text: "Add to cart",
               ontap: () async {
-                print(controller.products[index].prodRkPrice);
-
-                final model2 = AddToCartModel(
-                  name: controller.products[index].prodName,
-                  quantity: counter.counters[index],
-                  price: double.tryParse(
-                          controller.products[index].prodRkPrice.toString()) ??
-                      0.0,
+                final existingCartItem =
+                    cartController.cartList.firstWhereOrNull(
+                  (item) => item.name == controller.products[index].prodName,
                 );
-
-                CartController cartController = Get.find<CartController>();
-
-                cartController.addcartList(model2);
-                // Get.back();
-                // Get.to(CartPage(
-                //   index: index,
-                // ));
+                if (existingCartItem == null) {
+                  Get.back();
+                  final model2 = AddToCartModel(
+                    name: controller.products[index].prodName,
+                    quantity: counter.counters[index],
+                    price: double.tryParse(controller
+                            .products[index].prodRkPrice
+                            .toString()) ??
+                        0.0,
+                  );
+                  cartController.addcartList(model2);
+                  Get.snackbar("Ok", "Product added to cart",
+                      snackPosition: SnackPosition.BOTTOM);
+                } else {
+                  Get.snackbar("Added", "product already added in cart");
+                }
               },
               color: Colors.blue,
             ),

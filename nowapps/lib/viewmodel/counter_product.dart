@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
 class CounterController extends GetxController {
-  final _counters = List<int>.filled(7, 0).obs;
+  final _counters = List<int>.filled(10, 0).obs;
 
   List<int> get counters => _counters.toList();
 
