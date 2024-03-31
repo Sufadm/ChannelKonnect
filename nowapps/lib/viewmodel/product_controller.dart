@@ -23,13 +23,4 @@ class ProductController extends GetxController {
     }
     update();
   }
-
-  void toggleProductSelection(Product product) {
-    if (selectedProducts.contains(product)) {
-      selectedProducts.remove(product);
-    } else {
-      selectedProducts.add(product);
-    }
-    update();
-  }
 }

@@ -19,11 +19,12 @@ class CounterWidget extends StatelessWidget {
         IconButton(
           icon: const Icon(Icons.remove),
           onPressed: () async {
-            await Future.delayed(const Duration(seconds: 1));
+            await Future.delayed(const Duration(milliseconds: 500));
             controller.decrement(index);
             if (controller.counters[index] > 0) {
               Get.snackbar("Added",
-                  "${controller.counters[index].toString()} product added");
+                  "${controller.counters[index].toString()} product added",
+                  duration: const Duration(milliseconds: 500));
             }
           },
         ),
@@ -40,10 +41,11 @@ class CounterWidget extends StatelessWidget {
         IconButton(
           icon: const Icon(Icons.add),
           onPressed: () async {
-            await Future.delayed(const Duration(seconds: 1));
+            await Future.delayed(const Duration(milliseconds: 500));
             controller.increment(index);
             Get.snackbar("Added",
-                "${controller.counters[index].toString()} product added");
+                "${controller.counters[index].toString()} product added",
+                duration: const Duration(milliseconds: 500));
           },
         ),
       ],

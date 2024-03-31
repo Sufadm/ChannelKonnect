@@ -19,7 +19,6 @@ class ProductDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ProductController controller = Get.find();
-
     final counter = Get.put(CounterController());
     final cartController = Get.find<CartController>();
 
@@ -97,7 +96,7 @@ class ProductDetailsPage extends StatelessWidget {
                     cartController.cartList.firstWhereOrNull(
                   (item) => item.name == controller.products[index].prodName,
                 );
-                if (existingCartItem == null) {
+                if (existingCartItem == null && counter.counters[index] > 0) {
                   Get.back();
                   final model2 = AddToCartModel(
                     name: controller.products[index].prodName,
@@ -109,7 +108,11 @@ class ProductDetailsPage extends StatelessWidget {
                   );
                   cartController.addcartList(model2);
                   Get.snackbar("Ok", "Product added to cart",
-                      snackPosition: SnackPosition.BOTTOM);
+                      snackPosition: SnackPosition.BOTTOM,
+                      duration: const Duration(seconds: 1));
+                } else if (counter.counters[index] < 1) {
+                  Get.snackbar("Pls", "add quantity",
+                      duration: const Duration(seconds: 1));
                 } else {
                   Get.snackbar("Added", "product already added in cart");
                 }
