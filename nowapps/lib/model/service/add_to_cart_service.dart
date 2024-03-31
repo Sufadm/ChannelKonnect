@@ -35,4 +35,17 @@ class CartController extends GetxController {
         cartListMaps.map((e) => AddToCartModel.fromMap(e)).toList();
     print(cartListMaps);
   }
+
+  Future<void> deleteCartItem(int index) async {
+    int? idToDelete = cartList[index].id;
+    await _db.rawDelete('DELETE FROM productcart WHERE id = ?', [idToDelete]);
+    cartList.removeAt(index);
+    update();
+  }
+
+  @override
+  void onClose() async {
+    await _db.close();
+    super.onClose();
+  }
 }
